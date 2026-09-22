@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07111E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <title>ITC Vocacional — Celaya</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Archivo correcto: styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+
+<body>
+  <div class="app" id="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-hdr">
+        <div class="sb-greeting">Instituto Tecnológico de Celaya</div>
+
+        <div class="sb-name">
+          ITC <span>Vocacional</span>
+        </div>
+
+        <div class="sb-status">
+          <div class="sdot" id="sdot"></div>
+          <span class="slbl" id="slbl">IA activa</span>
+        </div>
+      </div>
+
+      <div class="sb-nav" id="sbNav">
+        <div class="sb-section">Acciones</div>
+
+        <button class="sb-btn" onclick="goHome()" id="sbHome">
+          <span class="sb-btn-icon">🏠</span>
+          <div class="sb-btn-txt">
+            <div class="sb-btn-name">Inicio</div>
+            <div class="sb-btn-meta">Pantalla principal</div>
+          </div>
+        </button>
+
+        <button class="sb-btn" onclick="startQuiz()" id="sbQuiz">
+          <span class="sb-btn-icon">📊</span>
+          <div class="sb-btn-txt">
+            <div class="sb-btn-name">Cuestionario vocacional</div>
+            <div class="sb-btn-meta">9 preguntas · ~5 min</div>
+          </div>
+        </button>
+
+        <button class="sb-btn" onclick="goFreeChat()">
+          <span class="sb-btn-icon">💬</span>
+          <div class="sb-btn-txt">
+            <div class="sb-btn-name">Chat con IA</div>
+            <div class="sb-btn-meta">Pregunta lo que quieras</div>
+          </div>
+        </button>
+
+        <div class="sb-divider"></div>
+
+        <div class="sb-section">Carreras · ITC Celaya</div>
+        <div id="sbCarreras"></div>
+      </div>
+
+      <div class="sb-footer">
+        <button class="sb-action" onclick="toggleTheme()">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+
+          <span id="themeLabel">Modo claro</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main" id="main">
+
+      <!-- ENCABEZADO PARA MÓVIL -->
+      <div class="mob-hdr" id="mobHdr">
+        <div>
+          <div style="font-family:var(--o);font-size:11px;color:var(--muted)">
+            Instituto Tecnológico de Celaya
+          </div>
+
+          <div class="sb-name">
+            ITC <span>Vocacional</span>
+          </div>
+        </div>
+
+        <div class="mob-hdr-right">
+          <div
+            style="
+              display:flex;
+              align-items:center;
+              gap:5px;
+              background:rgba(61,184,122,.1);
+              border:1px solid rgba(61,184,122,.2);
+              border-radius:99px;
+              padding:4px 10px;
+            "
+          >
+            <div class="sdot" id="sdot2"></div>
+
+            <span
+              class="slbl"
+              id="slbl2"
+              style="
+                font-family:var(--o);
+                font-size:11px;
+                color:var(--green);
+                font-weight:600;
+              "
+            >
+              IA activa
+            </span>
+          </div>
+
+          <div
+            class="theme-toggle"
+            onclick="toggleTheme()"
+            id="themeToggle"
+            title="Cambiar tema"
+          >
+            ☀️
+          </div>
+        </div>
+      </div>
+
+      <!-- TOPBAR -->
+      <div class="topbar" id="topbar">
+        <div class="topbar-left">
+          <div>
+            <div class="topbar-title" id="topbarTitle">
+              Orientación Vocacional
+            </div>
+
+            <div class="topbar-sub" id="topbarSub">
+              Selecciona una carrera o inicia el cuestionario
+            </div>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <button class="btn-back hidden" id="btnBack" onclick="goHome()">
+            ← Inicio
+          </button>
+
+          <div
+            class="theme-toggle"
+            onclick="toggleTheme()"
+            title="Cambiar tema"
+            id="themeToggle2"
+          >
+            ☀️
+          </div>
+        </div>
+      </div>
+
+      <!-- PROGRESO -->
+      <div class="prog-wrap hidden" id="progWrap">
+        <div class="prog-inner">
+          <div class="prog-row">
+            <span class="prog-lbl">Perfil vocacional</span>
+            <span class="prog-num" id="progLabel">0 / 9</span>
+          </div>
+
+          <div class="prog-track">
+            <div class="prog-fill" id="progFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOME VIEW -->
+      <div class="content-scroll" id="homeView">
+        <div class="home-wrap">
+
+          <div class="banner">
+            <div class="banner-deco">🎓</div>
+
+            <div class="banner-tag">
+              Orientación vocacional · ITC Celaya · 2025
+            </div>
+
+            <div class="banner-title">
+              Encuentra tu<br>
+              <em>carrera ideal</em>
+            </div>
+
+            <div class="banner-sub">
+              Responde 9 preguntas y la IA analizará las
+              <strong>13 carreras del ITC Celaya</strong>
+              con salarios reales, empleos y videos del mercado mexicano.
+            </div>
+
+            <div class="banner-actions">
+              <button class="banner-cta" onclick="startQuiz()">
+                Comenzar cuestionario
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+
+              <button class="banner-ghost" onclick="goFreeChat()">
+                Ya sé mi carrera → Preguntar a la IA
+              </button>
+            </div>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-n">13</div>
+              <div class="stat-l">carreras disponibles</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-n">~5 min</div>
+              <div class="stat-l">duración del test</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-n">IA real</div>
+              <div class="stat-l">Claude API integrada</div>
+            </div>
+
+            <div class="stat-box">
+              <div class="stat-n">2.8k</div>
+              <div class="stat-l">estudiantes orientados</div>
+            </div>
+          </div>
+
+          <div class="feat-card" onclick="startQuiz()">
+            <div class="feat-icon">📊</div>
+            <div class="feat-title">Cuestionario vocacional</div>
+            <div class="feat-sub">
+              9 preguntas sobre tus intereses y habilidades. El motor de IA
+              analiza tu perfil con las 13 carreras.
+            </div>
+          </div>
+
+          <div class="feat-card" onclick="goFreeChat()">
+            <div class="feat-icon">🤖</div>
+            <div class="feat-title">Chat libre con IA</div>
+            <div class="feat-sub">
+              Pregunta lo que quieras sobre cualquier carrera: materias,
+              sueldos, campo laboral y empresas.
+            </div>
+          </div>
+
+          <div class="feat-card">
+            <div class="feat-icon">💰</div>
+            <div class="feat-title">Sueldos reales</div>
+            <div class="feat-sub">
+              Rangos salariales actuales del mercado laboral mexicano para
+              cada carrera, por nivel de experiencia.
+            </div>
+          </div>
+
+          <div class="feat-card">
+            <div class="feat-icon">📹</div>
+            <div class="feat-title">Videos y TikToks</div>
+            <div class="feat-sub">
+              Links directos a YouTube y TikTok con testimonios de estudiantes
+              y egresados de cada carrera.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CHAT VIEW -->
+      <div class="chat-wrap hidden" id="chatView">
+        <div class="chat-panel" id="chatPanel"></div>
+
+        <div class="input-area">
+          <div class="input-row">
+            <textarea
+              class="input-box"
+              id="inputBox"
+              placeholder="Escribe tu pregunta sobre las carreras…"
+              rows="1"
+              disabled
+            ></textarea>
+
+            <button
+              class="btn-send"
+              id="sendBtn"
+              onclick="sendMsg()"
+              disabled
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon
+                  points="22 2 15 22 11 13 2 9 22 2"
+                  fill="currentColor"
+                  stroke="none"
+                ></polygon>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Archivo correcto: JavaScript/script.js -->
+  <script src="JavaScript/script.js"></script>
+</body>
+</html>
