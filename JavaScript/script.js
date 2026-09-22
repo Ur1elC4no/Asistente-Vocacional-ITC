@@ -111,15 +111,92 @@ const CARRERAS=[
    futuro:'México es clave en la cadena global de semiconductores. Con la guerra comercial EUA-China, el país se posiciona como hub de chips. Los salarios son los más altos de toda la ingeniería.'},
 ]
 
+/* ═══ ICONOS INSTITUCIONALES ═══ */
+const ICON_PATHS={
+  home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/>',
+  quiz:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h5"/>',
+  chat:'<path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H8l-4 2 1.2-3.6A7.5 7.5 0 1 1 20 11.5Z"/>',
+  graduation:'<path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 11.2V16c2.8 2.2 7.2 2.2 10 0v-4.8M21 9v6"/>',
+  code:'<path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 5l-4 14"/>',
+  settings:'<path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/>',
+  factory:'<path d="M3 21V9l7 4V9l7 4V5h4v16H3Z"/><path d="M7 17h2M12 17h2M17 17h2M7 20h2M12 20h2M17 20h2"/>',
+  zap:'<path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/>',
+  flask:'<path d="M9 3h6M10 3v6l-5.5 9.2A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.8L14 9V3"/><path d="M7 16h10"/>',
+  chart:'<path d="M4 19V5M4 19h16"/><path d="M7 16v-4M11 16V8M15 16v-6M19 16v-9"/>',
+  briefcase:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/>',
+  leaf:'<path d="M20 4C11 4 5 8 5 14c0 3 2 5 5 5 6 0 10-6 10-15Z"/><path d="M4 21c2.5-5 6-8 11-10"/>',
+  medical:'<path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z"/><path d="M12 8v6M9 11h6"/>',
+  chip:'<rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 9h6v6H9zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  moon:'<path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/>',
+  assistant:'<rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 13h.01M15 13h.01M9 16h6M3 11v4M21 11v4"/>',
+  book:'<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 5.5V21M8 7h8M8 11h7"/>',
+  award:'<circle cx="12" cy="8" r="5"/><path d="m8.5 12.2-1 8 4.5-2.5 4.5 2.5-1-8"/>',
+  search:'<circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/>',
+  school:'<path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 11.2V16c2.8 2.2 7.2 2.2 10 0v-4.8M21 9v6"/>',
+  external:'<path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/>',
+  layers:'<path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/>'
+};
+
+const CAREER_ICONS={
+  C01:'code',C02:'settings',C03:'factory',C04:'zap',
+  C05:'flask',C06:'flask',C07:'chart',C08:'briefcase',
+  C09:'leaf',C10:'medical',C11:'settings',C12:'chip'
+};
+
+function iconSvg(name,className='ui-icon'){
+  return '<svg class="'+className+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(ICON_PATHS[name]||ICON_PATHS.layers)+'</svg>';
+}
+
+function careerIcon(c,className='career-icon'){
+  return iconSvg(CAREER_ICONS[c.id]||'layers',className);
+}
+
+function cleanLabel(value){
+  return String(value).replace(/^[^\p{L}\p{N}]*/u,'').trim();
+}
+
+function updateHomeStats(){
+  const values=[
+    [String(CARRERAS.length),'carreras analizadas'],
+    ['9','preguntas personalizadas'],
+    ['MXN','salarios estimados'],
+    ['~5 min','resultado rápido']
+  ];
+  document.querySelectorAll('.stats-row .stat-box').forEach((box,i)=>{
+    if(!values[i])return;
+    const n=box.querySelector('.stat-n'),l=box.querySelector('.stat-l');
+    if(n)n.textContent=values[i][0];
+    if(l)l.textContent=values[i][1];
+  });
+}
+
+function replaceStaticIcons(){
+  const staticIcons=[
+    ['#sbHome .sb-btn-icon','home'],
+    ['#sbQuiz .sb-btn-icon','quiz'],
+    ['.sb-btn[onclick="goFreeChat()"] .sb-btn-icon','chat'],
+    ['.banner-deco','graduation']
+  ];
+  staticIcons.forEach(([selector,name])=>{
+    const el=document.querySelector(selector);
+    if(el)el.innerHTML=iconSvg(name);
+  });
+  const featureNames=['quiz','assistant','chart','search'];
+  document.querySelectorAll('.feat-card .feat-icon').forEach((el,i)=>{
+    if(featureNames[i])el.innerHTML=iconSvg(featureNames[i]);
+  });
+}
+
 const PREGUNTAS=[
   {id:'mat',texto:'¿Qué tan bueno/a eres con las matemáticas y el pensamiento lógico?',tipo:'escala',min:'Me cuesta trabajo',max:'Es mi fuerte'},
   {id:'prog',texto:'¿Cuánto te gusta programar o crear software?',tipo:'escala',min:'Para nada',max:'Es mi pasión'},
   {id:'quim',texto:'¿Qué tan cómodo/a te sientes con química y biología?',tipo:'escala',min:'No me gustan',max:'Las domino'},
-  {id:'maquinas',texto:'¿Te gusta armar, reparar o diseñar máquinas y aparatos?',tipo:'bool',ops:['Sí, me fascina 🔧','No mucho'],vals:[1,0]},
-  {id:'trabajo',texto:'¿En qué ambiente de trabajo te imaginas mejor?',tipo:'op',ops:['Oficina 🏢','Laboratorio 🧪','Taller/Planta 🏭','Campo 🌳','Remoto/Mixto 💻'],vals:['oficina','laboratorio','taller','campo','mixto']},
+  {id:'maquinas',texto:'¿Te gusta armar, reparar o diseñar máquinas y aparatos?',tipo:'bool',ops:['Sí, me fascina','No mucho'],vals:[1,0]},
+  {id:'trabajo',texto:'¿En qué ambiente de trabajo te imaginas mejor?',tipo:'op',ops:['Oficina','Laboratorio','Taller/Planta','Campo','Remoto/Mixto'],vals:['oficina','laboratorio','taller','campo','mixto']},
   {id:'liderazgo',texto:'¿Te gusta coordinar equipos y tomar decisiones estratégicas?',tipo:'escala',min:'Prefiero trabajar solo',max:'Me encanta liderar'},
   {id:'naturaleza',texto:'¿Cuánto te importa el medio ambiente y la sustentabilidad?',tipo:'escala',min:'Poco',max:'Es mi prioridad'},
-  {id:'dibujo',texto:'¿Tienes habilidad para diseño técnico, planos o arquitectura?',tipo:'bool',ops:['Sí, soy bueno/a ✏️','No es lo mío'],vals:[1,0]},
+  {id:'dibujo',texto:'¿Tienes habilidad para diseño técnico, planos o arquitectura?',tipo:'bool',ops:['Sí, soy bueno/a','No es lo mío'],vals:[1,0]},
   {id:'negocios',texto:'¿Te interesa el mundo de los negocios o el emprendimiento?',tipo:'escala',min:'No mucho',max:'Es mi vocación'},
 ];
 
@@ -145,18 +222,34 @@ const S={fase:'home',perfil:{},pregIdx:0,historial:[],resultados:[]};
 function evalC(c,p){const v=p[c.v];if(v===undefined||v===null)return false;if(c.op==='>=')return Number(v)>=Number(c.val);if(c.op==='=')return v==c.val;if(c.op==='IN')return c.val.includes(v);return false;}
 function recomendar(p){return REGLAS.map(r=>{const car=CARRERAS.find(c=>c.id===r.c);const tot=r.conds.length,ok=r.conds.filter(c=>evalC(c,p)).length;return{...car,score:ok===tot?r.score:(ok/tot)*r.score};}).sort((a,b)=>b.score-a.score).slice(0,3);}
 
+/* ═══ FORMATO DE SALARIOS ═══ */
+function formatSalary(value){
+  return String(value)
+    .replace(/\$(\d+)k/g,(_,n)=>'$'+(Number(n)*1000).toLocaleString('es-MX'))
+    .replace(/(\d+)k/g,(_,n)=>(Number(n)*1000).toLocaleString('es-MX'));
+}
+
+function shortSalary(value){
+  const match=String(value).match(/\$(\d+)k/);
+  return match?'≈$'+match[1]+'k/mes':value;
+}
+
 /* ═══ THEME ═══ */
 let dark=true;
+function updateThemeUI(){
+  const lbl=dark?'Activar modo claro':'Activar modo oscuro';
+  const t1=document.getElementById('themeToggle'),t2=document.getElementById('themeToggle2');
+  const ico=iconSvg(dark?'sun':'moon','theme-icon');
+  if(t1){t1.innerHTML=ico;t1.title=lbl;t1.setAttribute('aria-label',lbl);}
+  if(t2){t2.innerHTML=ico;t2.title=lbl;t2.setAttribute('aria-label',lbl);}
+  const tl=document.getElementById('themeLabel');
+  if(tl)tl.textContent=lbl;
+}
+
 function toggleTheme(){
   dark=!dark;
   document.documentElement.setAttribute('data-theme',dark?'dark':'light');
-  const ico=dark?'☀️':'🌙';
-  const lbl=dark?'Modo claro':'Modo oscuro';
-  const t1=document.getElementById('themeToggle'),t2=document.getElementById('themeToggle2');
-  if(t1){t1.textContent=ico;}
-  if(t2){t2.textContent=ico;}
-  const tl=document.getElementById('themeLabel');
-  if(tl)tl.textContent=lbl;
+  updateThemeUI();
 }
 
 /* ═══ DOM REFS ═══ */
@@ -177,7 +270,7 @@ const scrollChat=()=>setTimeout(()=>$panel.scrollTo({top:$panel.scrollHeight,beh
 
 function setStatus(s){
   ['sdot','sdot2'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='sdot'+(s==='busy'?' busy':'');});
-  ['slbl','slbl2'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=s==='busy'?'Procesando…':'IA activa';}});
+  ['slbl','slbl2'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=s==='busy'?'Procesando…':'Asistente disponible';}});
 }
 
 function md(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/`(.*?)`/g,'<code>$1</code>').replace(/\n/g,'<br>');}
@@ -185,15 +278,15 @@ function md(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(
 function addMsg(who,html,extra){
   const d=document.createElement('div');d.className='msg '+who;
   const av=document.createElement('div');av.className='av '+(who==='bot'?'bot':'usr');
-  av.textContent=who==='bot'?'🎓':'Tú';
+  av.innerHTML=who==='bot'?iconSvg('assistant','msg-icon'):'Tú';
   const b=document.createElement('div');b.className='bubble';
   b.innerHTML=md(html);if(extra)b.appendChild(extra);
   d.appendChild(av);d.appendChild(b);$panel.appendChild(d);scrollChat();return b;
 }
-function addCard(el){const d=document.createElement('div');d.className='msg bot';const av=document.createElement('div');av.className='av bot';av.textContent='🎓';d.appendChild(av);d.appendChild(el);$panel.appendChild(d);scrollChat();}
+function addCard(el){const d=document.createElement('div');d.className='msg bot';const av=document.createElement('div');av.className='av bot';av.innerHTML=iconSvg('assistant','msg-icon');d.appendChild(av);d.appendChild(el);$panel.appendChild(d);scrollChat();}
 
 let typEl=null;
-function showTyping(){if(typEl)return;const d=document.createElement('div');d.className='msg bot';d.id='typ';const av=document.createElement('div');av.className='av bot';av.textContent='🎓';const b=document.createElement('div');b.className='bubble';b.innerHTML='<div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>';d.appendChild(av);d.appendChild(b);$panel.appendChild(d);scrollChat();typEl=d;}
+function showTyping(){if(typEl)return;const d=document.createElement('div');d.className='msg bot';d.id='typ';const av=document.createElement('div');av.className='av bot';av.innerHTML=iconSvg('assistant','msg-icon');const b=document.createElement('div');b.className='bubble';b.innerHTML='<div class="typing"><div class="td"></div><div class="td"></div><div class="td"></div></div>';d.appendChild(av);d.appendChild(b);$panel.appendChild(d);scrollChat();typEl=d;}
 function removeTyping(){if(typEl){typEl.remove();typEl=null;}}
 
 /* ═══ VISTAS ═══ */
@@ -228,16 +321,28 @@ function renderSidebar(){
   const cont=document.getElementById('sbCarreras');
   CARRERAS.forEach(c=>{
     const btn=document.createElement('button');btn.className='sb-btn';btn.id='sb-'+c.id;
-    btn.innerHTML=`<span class="sb-btn-icon">${c.emoji}</span><div class="sb-btn-txt"><div class="sb-btn-name">${c.nombre}</div><div class="sb-btn-meta">${c.area}</div></div><div class="sb-btn-sal">${c.sal.m.split('–')[0]}</div>`;
+    const salaryLabel=shortSalary(c.sal.m);
+    btn.title=c.nombre+': salario mid-level estimado '+formatSalary(c.sal.m)+' MXN/mes';
+    btn.setAttribute('aria-label',c.nombre+'. '+c.area+'. Salario estimado '+formatSalary(c.sal.m)+' MXN al mes.');
+    btn.innerHTML='<span class="sb-btn-icon">'+careerIcon(c)+'</span><div class="sb-btn-txt"><div class="sb-btn-name">'+c.nombre+'</div><div class="sb-btn-meta">'+c.area+'</div></div><div class="sb-btn-sal">'+salaryLabel+'</div>';
     btn.onclick=()=>showCareerDetail(c);
     cont.appendChild(btn);
   });
 }
 
+function syncCareerCount(){
+  const count=CARRERAS.length;
+  document.querySelectorAll('.banner-sub strong,.feat-sub').forEach(el=>{
+    el.textContent=el.textContent.replace(/\b(?:12|13) carreras\b/g,count+' carreras');
+  });
+  const stat=document.querySelector('.stats-row .stat-box .stat-n');
+  if(stat)stat.textContent=count;
+}
+
 /* ═══ AI ═══ */
 const SYS=`Eres el orientador vocacional del Instituto Tecnológico de Celaya (ITC Celaya), parte del TecNM. Ayudas a estudiantes de preparatoria a elegir su carrera universitaria.
-Las 12 carreras del ITC Celaya: Ing. en Sistemas Computacionales, Ing. Mecatrónica, Ing. Industrial, Ing. Electrónica, Ing. Bioquímica, Ing. Química, Ing. en Gestión Empresarial, Lic. en Administración, Ing. Ambiental, Ing. Biomédica, Ing. Mecánica, Ing. Semiconductores.
-Reglas: español siempre, tono cálido y motivador como orientador humano real, salarios en MXN reales, máximo 3 párrafos, emojis con moderación, no inventes datos del ITC remite a itcelaya.edu.mx.`;
+Las ${CARRERAS.length} carreras del ITC Celaya: Ing. en Sistemas Computacionales, Ing. Mecatrónica, Ing. Industrial, Ing. Electrónica, Ing. Bioquímica, Ing. Química, Ing. en Gestión Empresarial, Lic. en Administración, Ing. Ambiental, Ing. Biomédica, Ing. Mecánica, Ing. Semiconductores.
+Reglas: español siempre, tono cálido y motivador como orientador humano real, salarios en MXN reales, máximo 3 párrafos, evita emojis salvo que el usuario los use, no inventes datos del ITC remite a itcelaya.edu.mx.`;
 
 async function callAI(msg,extra){
   setStatus('busy');showTyping();
@@ -267,7 +372,7 @@ async function startQuiz(){
   setSbActive('sbQuiz');
   $prog.classList.remove('hidden');updateProg();
   showTyping();await wait(700);removeTyping();
-  addMsg('bot','¡Hola! Soy tu orientador del **ITC Celaya**. 🎓\n\nVoy a hacerte **9 preguntas** para conocer tu perfil. No hay respuestas correctas — responde con honestidad.\n\n¡Empecemos!');
+  addMsg('bot','¡Hola! Soy tu orientador del **ITC Celaya**.\n\nVoy a hacerte **9 preguntas** para conocer tu perfil. No hay respuestas correctas — responde con honestidad.\n\n¡Empecemos!');
   await wait(300);showQ(0);
 }
 
@@ -297,24 +402,24 @@ async function calcResults(){
   S.fase='resultado';
   showTyping();await wait(1100);removeTyping();
   const top=recomendar(S.perfil);S.resultados=top;
-  addMsg('bot','Analicé las **12 carreras** con tu perfil. Aquí están tus mejores opciones — toca cualquiera para ver todos los detalles:');
+  addMsg('bot',`Analicé las **${CARRERAS.length} carreras** con tu perfil. Aquí están tus mejores opciones — toca cualquiera para ver todos los detalles:`);
   const wrap=document.createElement('div');wrap.className='rank-wrap';
-  const medals=['🥇','🥈','🥉'];
+  const medals=['01','02','03'];
   top.forEach((c,i)=>{
     const pct=Math.round(c.score*100);
     const row=document.createElement('div');row.className='rank-row';
-    row.innerHTML=`<div class="rank-medal">${medals[i]}</div><div class="rank-info"><div class="rank-name">${c.emoji} ${c.nombre}</div><div class="rank-bar"><div class="rank-fill r${i}" id="rf${i}"></div></div></div><div class="rank-pct" id="rp${i}">0%</div>`;
+    row.innerHTML=`<div class="rank-medal">${medals[i]}</div><div class="rank-info"><div class="rank-name">${careerIcon(c)} ${c.nombre}</div><div class="rank-bar"><div class="rank-fill r${i}" id="rf${i}"></div></div></div><div class="rank-pct" id="rp${i}">0%</div>`;
     row.onclick=()=>showCareerDetail(c,i);wrap.appendChild(row);
   });
   addCard(wrap);
   await wait(150);
   top.forEach((c,i)=>{const pct=Math.round(c.score*100);setTimeout(()=>{const f=document.getElementById('rf'+i),p=document.getElementById('rp'+i);if(f)f.style.width=pct+'%';if(p)animNum(p,pct);},i*160);});
   const pSum=Object.entries(S.perfil).map(([k,v])=>`${k}:${v}`).join(', ');
-  S.historial=[{role:'user',content:`Mi perfil: ${pSum}. Recomendaciones: 1. ${top[0].nombre} (${Math.round(top[0].score*100)}%), 2. ${top[1].nombre} (${Math.round(top[1].score*100)}%), 3. ${top[2].nombre} (${Math.round(top[2].score*100)}%).`},{role:'assistant',content:`Perfecto, ya tengo tu perfil. Puedo darte información detallada sobre cualquiera de las 13 carreras del ITC.`}];
+  S.historial=[{role:'user',content:`Mi perfil: ${pSum}. Recomendaciones: 1. ${top[0].nombre} (${Math.round(top[0].score*100)}%), 2. ${top[1].nombre} (${Math.round(top[1].score*100)}%), 3. ${top[2].nombre} (${Math.round(top[2].score*100)}%).`},{role:'assistant',content:`Perfecto, ya tengo tu perfil. Puedo darte información detallada sobre cualquiera de las ${CARRERAS.length} carreras del ITC.`}];
   await wait(1600);
   const btns=document.createElement('div');btns.className='btn-group';
-  top.forEach((c,i)=>{const b=document.createElement('button');b.className='bc';b.textContent=`${c.emoji} Ver ${c.nombre.replace(/Ing\. en |Ing\. |Lic\. en /,'').split(' ').slice(0,2).join(' ')}`;b.onclick=()=>{btns.querySelectorAll('.bc').forEach(x=>x.classList.add('used'));showCareerDetail(c,i);};btns.appendChild(b);});
-  addMsg('bot',`🎯 **${top[0].nombre}** es tu mejor opción con **${Math.round(top[0].score*100)}% de afinidad**.\n\nToca cualquier carrera para ver sueldos, empleos, videos y más. O escríbeme abajo 👇`,btns);
+  top.forEach((c,i)=>{const b=document.createElement('button');b.className='bc';b.innerHTML=careerIcon(c)+'<span>Ver '+c.nombre.replace(/Ing\. en |Ing\. |Lic\. en /,'').split(' ').slice(0,2).join(' ')+'</span>';b.onclick=()=>{btns.querySelectorAll('.bc').forEach(x=>x.classList.add('used'));showCareerDetail(c,i);};btns.appendChild(b);});
+  addMsg('bot',`**${top[0].nombre}** es tu mejor opción con **${Math.round(top[0].score*100)}% de afinidad**.\n\nToca cualquier carrera para ver sueldos, empleos, videos y más. O escríbeme abajo.`,btns);
   S.fase='libre';$input.disabled=false;$send.disabled=false;$input.placeholder='Pregúntame sobre cualquier carrera del ITC…';$prog.classList.add('hidden');
   setTimeout(()=>$input.focus(),400);
 }
@@ -330,7 +435,7 @@ function showCareerDetail(car,rank){
   card.innerHTML=`
     <div class="cd-hero">
       ${pct?`<div class="cd-match">${pct}% afín</div>`:''}
-      <span class="cd-emoji">${car.emoji}</span>
+      <span class="cd-emoji">${careerIcon(car)}</span>
       <div class="cd-title">${car.nombre}</div>
       <div class="cd-area">${car.area} · ITC Celaya · TecNM</div>
     </div>
@@ -365,20 +470,20 @@ function showCareerDetail(car,rank){
   addCard(card);
 }
 
-function fillResumen(c,el){el.innerHTML=`<div class="info-lbl">¿Qué es?</div><div class="info-txt">${c.resumen}</div><div class="divider"></div><div class="info-lbl">Demanda laboral</div><div class="info-txt">${c.demanda} — ${c.futuro}</div><div class="divider"></div><div class="info-lbl">Materias</div><div class="tags">${c.materias.map(m=>`<span class="tag">📚 ${m}</span>`).join('')}</div><div class="divider"></div><div class="info-lbl">Habilidades técnicas</div><div class="tags">${c.skills.map(s=>`<span class="tag">⚙️ ${s}</span>`).join('')}</div>`;}
-function fillSueldos(c,el){el.innerHTML=`<div class="info-lbl">Salario mensual bruto en México</div><div class="salary-grid"><div class="sal-box"><div class="sal-lbl">Junior</div><div class="sal-val">$${c.sal.j}</div><div class="sal-sub">0–2 años</div></div><div class="sal-box"><div class="sal-lbl">Mid-level</div><div class="sal-val">$${c.sal.m}</div><div class="sal-sub">3–6 años</div></div><div class="sal-box"><div class="sal-lbl">Senior</div><div class="sal-val">$${c.sal.s}</div><div class="sal-sub">7+ años</div></div></div><div class="divider"></div><div class="info-lbl">Perspectivas</div><div class="info-txt">${c.demanda} · ${c.futuro}</div><div class="divider"></div><div class="info-lbl">Habilidades mejor pagadas</div><div class="tags">${c.skills.map(s=>`<span class="tag">💎 ${s}</span>`).join('')}</div>`;}
-function fillEmpleos(c,el){el.innerHTML=`<div class="info-lbl">Puestos típicos</div><div class="job-list">${c.empleos.map(j=>`<div class="job-row"><span class="job-icon">${j.i}</span><span class="job-txt">${j.t}</span></div>`).join('')}</div><div class="divider"></div><div class="info-lbl">Empresas en Celaya y el Bajío</div><div class="info-txt">El Bajío concentra empresas como <strong style="color:var(--text2)">Toyota, Honda, Mazda, Nestlé, General Motors, Lala</strong> y cientos de proveedoras. El ITC tiene convenios de prácticas con muchas de ellas.</div><div class="divider"></div><div class="info-lbl">Más opciones</div><div class="tags"><span class="tag">🏛️ Gobierno</span><span class="tag">🎓 Docencia</span><span class="tag">🚀 Emprendimiento</span><span class="tag">🌎 Home office</span><span class="tag">🇺🇸 EUA/Canadá</span></div>`;}
+function fillResumen(c,el){el.innerHTML=`<div class="info-lbl">¿Qué es?</div><div class="info-txt">${c.resumen}</div><div class="divider"></div><div class="info-lbl">Demanda laboral</div><div class="info-txt">${cleanLabel(c.demanda)} — ${c.futuro}</div><div class="divider"></div><div class="info-lbl">Materias</div><div class="tags">${c.materias.map(m=>`<span class="tag">${iconSvg('book','tag-icon')} ${m}</span>`).join('')}</div><div class="divider"></div><div class="info-lbl">Habilidades técnicas</div><div class="tags">${c.skills.map(s=>`<span class="tag">${iconSvg('settings','tag-icon')} ${s}</span>`).join('')}</div>`;}
+function fillSueldos(c,el){el.innerHTML=`<div class="info-lbl">Salario mensual bruto estimado · MXN</div><div class="salary-grid"><div class="sal-box"><div class="sal-lbl">Junior</div><div class="sal-val">${formatSalary(c.sal.j)}</div><div class="sal-sub">MXN/mes · 0–2 años</div></div><div class="sal-box"><div class="sal-lbl">Mid-level</div><div class="sal-val">${formatSalary(c.sal.m)}</div><div class="sal-sub">MXN/mes · 3–6 años</div></div><div class="sal-box"><div class="sal-lbl">Senior</div><div class="sal-val">${formatSalary(c.sal.s)}</div><div class="sal-sub">MXN/mes · 7+ años</div></div></div><div class="divider"></div><div class="info-lbl">Perspectivas</div><div class="info-txt">${cleanLabel(c.demanda)} · ${c.futuro}</div><div class="divider"></div><div class="info-lbl">Habilidades mejor pagadas</div><div class="tags">${c.skills.map(s=>`<span class="tag">${iconSvg('award','tag-icon')} ${s}</span>`).join('')}</div>`;}
+function fillEmpleos(c,el){el.innerHTML=`<div class="info-lbl">Puestos típicos</div><div class="job-list">${c.empleos.map(j=>`<div class="job-row"><span class="job-icon">${iconSvg('briefcase','job-svg')}</span><span class="job-txt">${j.t}</span></div>`).join('')}</div><div class="divider"></div><div class="info-lbl">Empresas en Celaya y el Bajío</div><div class="info-txt">El Bajío concentra empresas como <strong style="color:var(--text2)">Toyota, Honda, Mazda, Nestlé, General Motors, Lala</strong> y cientos de proveedoras. El ITC tiene convenios de prácticas con muchas de ellas.</div><div class="divider"></div><div class="info-lbl">Más opciones</div><div class="tags"><span class="tag">Gobierno</span><span class="tag">Docencia</span><span class="tag">Emprendimiento</span><span class="tag">Home office</span><span class="tag">EUA/Canadá</span></div>`;}
 function fillVideos(c,el){
   const grid=document.createElement('div');grid.className='yt-grid';
-  c.yt.forEach(v=>{const url=`https://www.youtube.com/results?search_query=${encodeURIComponent(v.q)}`;const a=document.createElement('a');a.className='yt-card';a.href=url;a.target='_blank';a.rel='noopener';a.innerHTML=`<div class="yt-thumb"><span>${c.emoji}</span><div class="play-icon"><div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div></div><div class="yt-info"><div class="yt-title">${v.t}</div><div class="yt-source">Ver en YouTube →</div></div>`;grid.appendChild(a);});
+  c.yt.forEach(v=>{const url=`https://www.youtube.com/results?search_query=${encodeURIComponent(v.q)}`;const a=document.createElement('a');a.className='yt-card';a.href=url;a.target='_blank';a.rel='noopener';a.innerHTML=`<div class="yt-thumb"><span>${careerIcon(c)}</span><div class="play-icon"><div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div></div><div class="yt-info"><div class="yt-title">${v.t}</div><div class="yt-source">Ver en YouTube →</div></div>`;grid.appendChild(a);});
   el.appendChild(grid);
   const ext=document.createElement('div');ext.className='ext-row';
-  ext.innerHTML=`<a class="ext-link" href="https://www.tiktok.com/search?q=${encodeURIComponent(c.tt)}" target="_blank" rel="noopener"><span class="ext-icon">📱</span><div class="ext-txt"><div class="ext-title">TikTok — "${c.tt}"</div><div class="ext-sub">Testimonios de estudiantes y egresados</div></div><span class="ext-arr">›</span></a><a class="ext-link" href="https://www.youtube.com/results?search_query=${encodeURIComponent('ITC Celaya '+c.nombre)}" target="_blank" rel="noopener"><span class="ext-icon">🏫</span><div class="ext-txt"><div class="ext-title">ITC Celaya en YouTube</div><div class="ext-sub">Busca egresados y eventos del campus</div></div><span class="ext-arr">›</span></a>`;
+  ext.innerHTML=`<a class="ext-link" href="https://www.tiktok.com/search?q=${encodeURIComponent(c.tt)}" target="_blank" rel="noopener"><span class="ext-icon">${iconSvg('search','ext-svg')}</span><div class="ext-txt"><div class="ext-title">Buscar en TikTok — "${c.tt}"</div><div class="ext-sub">Testimonios de estudiantes y egresados</div></div><span class="ext-arr">›</span></a><a class="ext-link" href="https://www.youtube.com/results?search_query=${encodeURIComponent('ITC Celaya '+c.nombre)}" target="_blank" rel="noopener"><span class="ext-icon">${iconSvg('school','ext-svg')}</span><div class="ext-txt"><div class="ext-title">ITC Celaya en YouTube</div><div class="ext-sub">Busca egresados y eventos del campus</div></div><span class="ext-arr">›</span></a>`;
   el.appendChild(ext);
 }
 function fillIA(c,el){
   const qs=[`¿Por qué estudiar ${c.nombre.replace(/Ing\. en |Ing\. |Lic\. en /,'')}?`,`¿Cuánto gana un egresado en México?`,`¿Qué materias son las más difíciles?`,`¿Cuáles son las mejores empresas?`,`¿Puedo emprender con esta carrera?`];
-  const resp=document.createElement('div');resp.className='ai-resp';resp.textContent='Selecciona una pregunta o escríbela abajo 👇';
+  const resp=document.createElement('div');resp.className='ai-resp';resp.textContent='Selecciona una pregunta o escríbela abajo.';
   const qrow=document.createElement('div');qrow.className='ai-qrow';
   qs.forEach(q=>{const b=document.createElement('button');b.className='ai-qbtn';b.textContent=q.length>38?q.slice(0,36)+'…':q;b.onclick=()=>quickAI(`Sobre ${c.nombre} en el ITC Celaya: ${q}`,resp);qrow.appendChild(b);});
   const custom=document.createElement('div');custom.className='ai-custom';
@@ -394,7 +499,7 @@ function fillIA(c,el){
 async function goFreeChat(){
   S.fase='libre';S.historial=[];$panel.innerHTML='';
   showChatView('Chat con IA','Pregunta lo que quieras sobre las carreras');
-  addMsg('bot','¡Hola! Puedo responderte cualquier duda sobre las **12 carreras del ITC Celaya** 🎓\n\nPregúntame sobre materias, sueldos, campo laboral, diferencias entre carreras o lo que necesites.');
+  addMsg('bot',`¡Hola! Puedo responderte cualquier duda sobre las **${CARRERAS.length} carreras del ITC Celaya**.\n\nPregúntame sobre materias, sueldos, campo laboral, diferencias entre carreras o lo que necesites.`);
   $input.disabled=false;$send.disabled=false;$input.placeholder='¿Sobre qué carrera quieres saber?';
   setTimeout(()=>$input.focus(),300);
 }
@@ -407,7 +512,7 @@ async function sendMsg(){
   await callAI(msg);
   if(found&&S.fase==='libre'){
     const b=document.createElement('button');b.className='bc';
-    b.textContent=`${found.emoji} Ver ficha de ${found.nombre.replace(/Ing\. en |Ing\. |Lic\. en /,'').split(' ').slice(0,3).join(' ')}`;
+    b.innerHTML=careerIcon(found)+'<span>Ver ficha de '+found.nombre.replace(/Ing\. en |Ing\. |Lic\. en /,'').split(' ').slice(0,3).join(' ')+'</span>';
     b.onclick=()=>{b.classList.add('used');showCareerDetail(found);};
     const wrap=document.createElement('div');wrap.className='btn-group';wrap.appendChild(b);
     addMsg('bot','Aquí puedes ver toda la información:',wrap);
@@ -418,5 +523,10 @@ $input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.prevent
 $input.addEventListener('input',()=>{$input.style.height='auto';$input.style.height=Math.min($input.scrollHeight,100)+'px';});
 
 /* ═══ INIT ═══ */
+replaceStaticIcons();
+updateThemeUI();
+syncCareerCount();
+updateHomeStats();
+setStatus('on');
 renderSidebar();
 setSbActive('sbHome');
